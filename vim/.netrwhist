@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/jetson/workbench/dotfiles'
+let g:netrw_dirhist_6='/Users/jetson/pink_plastic/dotfiles/dotbot/tools/git-submodule'
+let g:netrw_dirhist_5='/Users/jetson/pink_plastic/dotfiles/dotbot/tools'
+let g:netrw_dirhist_4='/Users/jetson/pink_plastic/dotfiles/dotbot'
+let g:netrw_dirhist_3='/Users/jetson/pink_plastic/dotfiles/dotbot/dotbot'
+let g:netrw_dirhist_2='/Users/jetson/pink_plastic/dotfiles/dotbot/dotbot/util'
+let g:netrw_dirhist_1='/Users/jetson/pink_plastic/dotfiles/dotbot/tools'
+let g:netrw_dirhist_0='/Users/jetson/pink_plastic/dotfiles/dotbot'
+let g:netrw_dirhist_9='/Users/jetson/pink_plastic/dotfiles/dotbot/dotbot'
+let g:netrw_dirhist_8='/Users/jetson/pink_plastic/dotfiles/dotbot'
