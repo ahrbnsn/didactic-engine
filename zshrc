@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,3 +101,21 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH="$HOME/.bin:$PATH"
+
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
+
+# jump jump!
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# ----- ALIAS -----
+# to ignore the alias and run actual vim '\vim'
+alias vim="nvim"
+alias edit="nvim"
+alias now="vercel"
+alias prune="git branch | grep -v 'main' | xargs git branch -D"
+alias editzsh="vim ~/.zshrc && source ~/.zshrc"
+alias :qall="exit"
+alias xit="exit"
+
+# alias savevideo="youtube-dl -o '~/Desktop/transfer_station/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
