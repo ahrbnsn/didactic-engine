@@ -1,0 +1,12 @@
+name: scaffold
+root: <%= @settings["workspace"] %>
+
+# on_project_first_start: dox-dc up -d activities
+# on_project_stop: dox-dc stop activities
+# attach: false
+
+windows:
+  - EDITOR: nvim .
+  - TEST:
+  - CONSOLE: 
+  - LOGS: 

@@ -7,6 +7,7 @@
 
 - link:
     ~/.config/nvim: config/nvim
+    ~/.config/tmuxinator: config/tmuxinator
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.tmux.conf: tmux.conf
@@ -19,12 +20,14 @@
     ~/.zshrc: zshrc
 
 - create:
-  - ~/archive/filing_cabinet
-  - ~/archive/img
-  - ~/archive/papers
-  - ~/archive/music
-  - ~/archive/video
-  - ~/archive/notes
+  - ~/Desktop/images
+  - ~/Desktop/papers
+  - ~/Desktop/music
+  - ~/Desktop/video
+  - ~/Desktop/notes
+  - ~/Desktop/books-work
+  - ~/Desktop/books-personal
+
 
 
   

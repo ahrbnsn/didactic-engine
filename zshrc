@@ -118,4 +118,38 @@ alias editzsh="vim ~/.zshrc && source ~/.zshrc"
 alias :qall="exit"
 alias xit="exit"
 
-# alias savevideo="youtube-dl -o '~/Desktop/transfer_station/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
+alias ripaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata -x --audio-format m4a"
+alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
+
+
+# ----------------------
+#  Tmuxinator helpers
+# ----------------------
+
+alias notes="t notes"
+
+function t() {
+  if [ -z "$1" ]; then
+    project=$(basename $PWD)
+    # if [ project = "doximity-client-vue" ]; then
+      # project="vue"
+    # fi
+    launch_tmux_project "$project"
+  else
+    launch_tmux_project "$1"
+  fi
+}
+
+function launch_tmux_project() {
+  if tmuxinator list | grep "$1"; then
+    echo "has the thing"
+    tmuxinator start "$1" && exit
+  else
+    echo "does not have the thing"
+    tmuxinator start scaffold -n "$1" workspace=$PWD && exit
+  fi
+}
+
+
+
+
