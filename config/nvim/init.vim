@@ -242,7 +242,7 @@ syntax on
 "silent! colorscheme Tomorrow-Night
 "
 colorscheme onedark
-g:onedark_terminal_italics=1
+let g:onedark_terminal_italics=1
 
 
 " ----------------------------------------------------------------------------
@@ -261,7 +261,6 @@ function MakeAWiki(path, name, frequency)
   let wiki.name = a:name
   let wiki.syntax = 'markdown'
   let wiki.ext = 'md'
-  let wiki.diary_rel_path= 'notes/'
   let wiki.diary_index = 'notes'
   let wiki.diary_header = 'Notes'
   let wiki.diary_frequency = a:frequency
@@ -286,12 +285,12 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 "  whitespace stripping
 " ----------------------------------------------------------------------------
 function! StripTrailingWhitespace()
-  let save_cursor = getpos(".")
-  %s/\s\+$//e
-  call setpos('.', save_cursor)
+  let _save_cursor = getpos(".")
+  %s/\s\+$//
+  call setpos('.', _save_cursor)
 endfunction
 
-autocmd BufWritePre *.rb,*.yml,*.js,*.jsx, *.css, *.scss,*.html call StripTrailingWhitespace()
+autocmd BufWritePre *.{rb,yml,js,jsx,css,scss,html} call StripTrailingWhitespace()
 
 
 " ----------------------------------------------------------------------------
