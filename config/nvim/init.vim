@@ -286,7 +286,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " ----------------------------------------------------------------------------
 function! StripTrailingWhitespace()
   let _save_cursor = getpos(".")
-  %s/\s\+$//
+  silent! %s/\s\+$//
   call setpos('.', _save_cursor)
 endfunction
 
