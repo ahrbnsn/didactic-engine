@@ -1,8 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+ZSH_DISABLE_COMPFIX="true"
+
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jetson/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -122,6 +124,8 @@ alias ripaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restr
 alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
 
 
+alias cat="bat"
+
 # ----------------------
 #  Tmuxinator helpers
 # ----------------------
@@ -151,5 +155,27 @@ function launch_tmux_project() {
 }
 
 
+# ----------------------
+#  Honeycomb specific things
+#  TODO move to own file; export in
+# ----------------------
 
+eval "$(goenv init -)"
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+export ENV=development
+
+# These are sample paths; your repos do not have to live in your home directory,
+# just make sure you update these paths to point to wherever you cloned the repos above.
+# And don't forget the trailing slash!
+export HOUND_ROOT="$HOME/workbench/hound/"
+export BASENJI_ROOT="$HOME/workbench/basenji/"
+
+export GOPATH=$(go env GOPATH)
+export GOPRIVATE=github.com/honeycomb.io
+export PATH=$PATH:$GOPATH/bin
+
+# Some of the code uses a lot of connections
+ulimit -n 8192
