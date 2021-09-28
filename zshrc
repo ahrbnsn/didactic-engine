@@ -115,14 +115,17 @@ export GIT_EDITOR='nvim'
 alias vim="nvim"
 alias edit="nvim"
 alias now="vercel"
-alias prune="git branch | grep -v 'main' | xargs git branch -D"
 alias editzsh="vim ~/.zshrc && source ~/.zshrc"
 alias :qall="exit"
 alias xit="exit"
 
+alias prune="git branch | grep -v 'main' | xargs git branch -D"
+alias amendit="git commit --amend --no-edit"
+alias gpof="git push origin head --force-with-lease"
+alias rewind="git reset HEAD~1"
+
 alias ripaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata -x --audio-format m4a"
 alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
-
 
 alias cat="bat"
 
@@ -145,11 +148,11 @@ function t() {
 }
 
 function launch_tmux_project() {
+  # if there is a tmuxinator project file that matches 
+  # the directory name, use it. otherwise launch w/ scaffolding
   if tmuxinator list | grep "$1"; then
-    echo "has the thing"
     tmuxinator start "$1" && exit
   else
-    echo "does not have the thing"
     tmuxinator start scaffold -n "$1" workspace=$PWD && exit
   fi
 }
@@ -177,5 +180,11 @@ export GOPATH=$(go env GOPATH)
 export GOPRIVATE=github.com/honeycomb.io
 export PATH=$PATH:$GOPATH/bin
 
+export LIBHONEY_DATASET=run-run-run
+
 # Some of the code uses a lot of connections
-ulimit -n 8192
+# export LIBHONEY_URL=http://localhost:8081
+# export LIBHONEY_WRITE_KEY="2825366d75f1020fd9de5b674d485dc6"
+# ulimit -n 8192
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

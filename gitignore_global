@@ -1,4 +1,6 @@
 scratchpad.txt
+*scratch*
+scratch
 
 # Compiled source #
 ###################
@@ -37,4 +39,8 @@ scratchpad.txt
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# should probably be a per-project thing, but hey#
+node_modules
+static
 

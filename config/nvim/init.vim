@@ -19,6 +19,7 @@ Plug 'prettier/vim-prettier'
 " Plug 'scrooloose/nerdcommenter'
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
+" Plug 'sjl/gundo.vim'
 
 
 " 
@@ -36,6 +37,8 @@ Plug 'epmatsw/ag.vim'
 Plug 'tpope/vim-abolish'
 Plug 'henrik/vim-qargs'
 Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 "
 " Markdown
@@ -77,6 +80,7 @@ set shiftwidth=2
 set number
 set nowrap
 set backspace=indent,eol,start
+set hidden " keep undo history when switching buffers
 
 set list
 set listchars=trail:.
@@ -180,7 +184,7 @@ vmap <s-tab> <gv
 
 
 " Git blame
-map <leader>g   :Gblame<CR>
+map <leader>g   :Git blame<CR>
 
 " Comment/uncomment lines
 vmap <leader>/  gc
@@ -328,3 +332,27 @@ let g:ctrlp_map = '<leader>f'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_mruf_relative = 1
 
+" ----------------------------------------------------------------------------
+" mouse
+" ----------------------------------------------------------------------------
+
+set mouse=a
+
+" ----------------------------------------------------------------------------
+" GF mappings
+" ----------------------------------------------------------------------------
+" function! SetUpEnvironment()
+"   let l:path = expand('%:p')
+"   if l:path =~ 'poodle'
+"     echom 'hey bob'
+"     setlocal path+=$PWD/packages
+" 		setlocal includeexpr=substitute(v:fname,'@honeycombio','','g') suffixesadd+=.ts,.tsx
+"     " setlocal includeexpr=substitute(v:fname,'honeycombio','packages','g') suffixesadd+=.ts,.tsx
+"   endif
+" endfunction
+
+" augroup js
+"   autocmd!
+"   autocmd FileType typescriptreact call SetUpEnvironment() 
+"   autocmd FileType javascript call SetUpEnvironment() 
+" augroup END

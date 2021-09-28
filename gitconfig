@@ -26,6 +26,7 @@
 	process = git-lfs filter-process
 [user]
 	email = github@rbnsn.xyz
+	name = Ashley Robinson
 [diff]
 	algorithm = histogram
 	ignoreSubmodules = dirty
@@ -39,3 +40,5 @@
 	insteadOf = https://github.com/
 [url "git://"]
 	insteadOf = https://
+[core]
+	excludesFile = ~/.gitignore_global
