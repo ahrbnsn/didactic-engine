@@ -182,6 +182,8 @@ export PATH=$PATH:$GOPATH/bin
 
 export LIBHONEY_DATASET=run-run-run
 
+
+alias "tilt"="j hound && tilt"
 # Some of the code uses a lot of connections
 # export LIBHONEY_URL=http://localhost:8081
 # export LIBHONEY_WRITE_KEY="2825366d75f1020fd9de5b674d485dc6"
