@@ -1,6 +1,7 @@
 scratchpad.txt
 *scratch*
 scratch
+xxx-*.md
 
 # Compiled source #
 ###################
@@ -42,5 +43,4 @@ Thumbs.db
 
 # should probably be a per-project thing, but hey#
 node_modules
-static
 

@@ -43,7 +43,7 @@ Plug 'junegunn/fzf.vim'
 "
 " Markdown
 "
-Plug 'reedes/vim-pencil', { 'for': 'markdown' }
+Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 autocmd! User goyo.vim echom 'Goyo is now loaded!'
 
@@ -93,9 +93,13 @@ set incsearch
 set noswapfile
 set hls             " search with highlights
 
+
+set ignorecase smartcase " case insensitive unless search has a capital
+
 " Write all writeable buffers when changing buffers or losing focus.
 set autowriteall                " Save when doing various buffer-switching things.
-autocmd BufLeave,FocusLost * silent! wall  " Save anytime we leave a buffer
+autocmd BufLeave * silent! wall  " Save anytime we leave a buffer
+autocmd FocusLost * silent! wall  " Save anytime we leave a buffer
 
 if has('termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -217,6 +221,10 @@ nnoremap <silent> <D-P> :ClearCtrlPCache<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>""
 
 
+" I keep hitting _ when i am trying to hit w and save
+cnoreabbrev <expr> _ ((getcmdtype() is# ':' && getcmdline() is# '_')?('w'):('W'))
+
+
 " Open the url under the cursor w/ a browser
 " https://stackoverflow.com/a/63352904
 nmap <silent>gx :sil :!open <c-r><c-a>g
@@ -282,7 +290,10 @@ let g:vimwiki_list = [wiki_1, wiki_2]
 "  vim-prettier 
 " ----------------------------------------------------------------------------
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml Prettier
+
+" au FileType *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html let b:prettier_exec_cmd = /"prettier-eslint"
 
 
 " ----------------------------------------------------------------------------
@@ -294,7 +305,7 @@ function! StripTrailingWhitespace()
   call setpos('.', _save_cursor)
 endfunction
 
-autocmd BufWritePre *.{rb,yml,js,jsx,css,scss,html} call StripTrailingWhitespace()
+autocmd BufWritePre *.{rb,yml,js,jsx,.ts,.tsx,css,scss,html} call StripTrailingWhitespace()
 
 
 " ----------------------------------------------------------------------------
@@ -341,18 +352,19 @@ set mouse=a
 " ----------------------------------------------------------------------------
 " GF mappings
 " ----------------------------------------------------------------------------
-" function! SetUpEnvironment()
-"   let l:path = expand('%:p')
-"   if l:path =~ 'poodle'
-"     echom 'hey bob'
-"     setlocal path+=$PWD/packages
-" 		setlocal includeexpr=substitute(v:fname,'@honeycombio','','g') suffixesadd+=.ts,.tsx
-"     " setlocal includeexpr=substitute(v:fname,'honeycombio','packages','g') suffixesadd+=.ts,.tsx
-"   endif
-" endfunction
+function! SetUpEnvironment()
+  let l:path = expand('%:p')
+  if l:path =~ 'poodle'
+    set wildignore+=**/node_modules/**
+    setlocal includeexpr=substitute(v:fname,'\honeycombio\','packages','g') suffixesadd+=.ts,.tsx,.js,.jsx
+    " setlocal includeexpr=substitute(v:fname,'honeycombio','packages','g') suffixesadd+=.ts,.tsx
+  endif
+endfunction
 
-" augroup js
-"   autocmd!
-"   autocmd FileType typescriptreact call SetUpEnvironment() 
-"   autocmd FileType javascript call SetUpEnvironment() 
-" augroup END
+augroup js
+  autocmd!
+  autocmd FileType typescript call SetUpEnvironment() 
+  autocmd FileType typescriptreact call SetUpEnvironment() 
+  autocmd FileType javascript call SetUpEnvironment() 
+augroup END
+"

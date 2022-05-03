@@ -116,6 +116,7 @@ alias vim="nvim"
 alias edit="nvim"
 alias now="vercel"
 alias editzsh="vim ~/.zshrc && source ~/.zshrc"
+alias catzsh="cat ~/.zshrc"
 alias :qall="exit"
 alias xit="exit"
 
@@ -158,10 +159,19 @@ function launch_tmux_project() {
 }
 
 
+alias branch_notes="vim xxx-$(eval git rev-parse --abbrev-ref HEAD)-notes.md"
+
 # ----------------------
 #  Honeycomb specific things
 #  TODO move to own file; export in
 # ----------------------
+
+# alias to sparse-checkout of hound. only the docs. so can
+# keep drafts as i work without attaching to specific branch
+# later, should hook up w/ markdown preview and launch from there
+# perhaps
+
+alias "go-docs"=cd "$HOME/workbench/poodle-docs/cmd/poodle/docs"
 
 eval "$(goenv init -)"
 
@@ -183,10 +193,97 @@ export PATH=$PATH:$GOPATH/bin
 export LIBHONEY_DATASET=run-run-run
 
 
-alias "tilt"="j hound && tilt"
-# Some of the code uses a lot of connections
-# export LIBHONEY_URL=http://localhost:8081
-# export LIBHONEY_WRITE_KEY="2825366d75f1020fd9de5b674d485dc6"
-# ulimit -n 8192
+export ST_API=""
+export FREE_DATASET="hello"
+
+alias tilt="cd ~/workbench/hound && tilt" 
+alias besttilt="tilt args -- --webpack-dev-server"
+
+unalias gsts # ohmyzsh has a git alias that smashes gsts cli tool
+
+# MARKDOWN PREVIEW HELPERS
+
+MARKDOWN_PREVIEW_DIR="~/workbench/markdown-preview"
+
+# `sync_markdown`: copies `*.md` files from the current working directory over 
+#     to markdown-preview and watches for changes, updating the copied files 
+#     anytime they're modified
+#
+#     Symlinks unfortunately won't play nicely w/ webpack's hot reloading, and 
+#     I failed to figure out a good way to watch files in another directory 
+#     direcly, so we copy.
+
+alias sync_markdown="node $MARKDOWN_PREVIEW_DIR/utils/sync -w $PWD"
+
+# `preview_markdown`: starts up the next.js app from anywhere our heart desires
+alias preview_markdown="yarn --cwd "$MARKDOWN_PREVIEW_DIR" dev"
+
+# `sync_and_preview`: start syncing & launch the web server in one fell swoop
+function sync_and_preview() {
+  preview_markdown & sync_markdown
+}
+
+# `add_toc`: update toc for file
+alias add_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc -i $PWD/"
+
+# `print_toc`: print to console the toc for file
+alias print_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc $PWD/"
+
+# gsts/aws fun
+export AWS_PROFILE=sts
+export GOOGLE_SP_ID=456279060050
+export GOOGLE_IDP_ID=C01jgaetc
+export HNYUSER="ashleyrobinson"
+alias prodaccess="gsts --aws-role-arn arn:aws:iam::702835727665:role/product --username=$HNYUSER@honeycomb.io"
+ 
+ 
+alias pdocs="cd ~/workbench/poodle-docs/cmd/poodle/docs/"
+#
+
+# Kubectl
+klogs () {
+	kubectl logs $@ -f $(kubectl get pods $@ | tail -n +2 | fzf | cut -d' ' -f1)
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# git aliases
+alias currentBranch="git rev-parse --abbrev-ref HEAD | pbcopy"
+alias localBranches="git log --branches --not --remotes --no-walk --decorate"
+
+
+
+
+#—-------------------------------
+#
+# Poodle Local Dev Aliases & Things
+#
+#—-—----------------—---------------
+
+# "normal" team
+export FREE_API="77661c513f0a82390f53be3d9f81d8e8"
+export FREE_API_URL=http://localhost:8081
+
+# basenji team
+export BASENJI_KEY="bfda4f50dacfcc7db0037641b4377c8f"
+export BASENJI_URL=http://localhost:8088
+
+# Some of the code uses a lot of connections
+# comment this out if you don't want things to be slow
+# export LIBHONEY_URL=$FREE_API_URL
+# export LIBHONEY_WRITE_KEY=$FREE_API
+# ulimit -n 8192
+
+
+# generate a ton of data:
+# :qall
+#
+
+#prelint
+prelint () {
+LIST=`git diff-index --diff-filter=d --name-only HEAD | grep "\.[tj]s[x]\{0,1\}$" | perl -pe 's/cmd\/poodle\///g'`; 
+if [ "$LIST" ]; then cd cmd/poodle; npx eslint --quiet $LIST; fi
+}
+
+# alias upgradeGo="cd $HOUND_ROOT; git checkout main; git pull; export GO_VERSION="$(cat .go-version)"; brew update && brew install goenv --head; goenv install $GO_VERSION; goenv shell $GO_VERSION; cd $HOUND_ROOT; git checkout -"
