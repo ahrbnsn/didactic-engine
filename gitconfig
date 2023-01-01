@@ -25,7 +25,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 [user]
-	email = github@rbnsn.xyz
+	email = ashleyrobinson@honeycomb.io 
 	name = Ashley Robinson
 [diff]
 	algorithm = histogram
@@ -42,3 +42,4 @@
 	insteadOf = https://
 [core]
 	excludesFile = ~/.gitignore_global
+	hooksPath = /Users/ashleyrobinson/workbench/dotfiles/config/githook_global

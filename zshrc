@@ -120,12 +120,14 @@ alias catzsh="cat ~/.zshrc"
 alias :qall="exit"
 alias xit="exit"
 
+alias at="tmux at"
+
 alias prune="git branch | grep -v 'main' | xargs git branch -D"
 alias amendit="git commit --amend --no-edit"
 alias gpof="git push origin head --force-with-lease"
 alias rewind="git reset HEAD~1"
 
-alias ripaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata -x --audio-format m4a"
+alias saveaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata -x --audio-format m4a"
 alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
 
 alias cat="bat"
@@ -160,6 +162,7 @@ function launch_tmux_project() {
 
 
 alias branch_notes="vim xxx-$(eval git rev-parse --abbrev-ref HEAD)-notes.md"
+alias daily_notes="cd ~/workbench/hound/cmd/poodle/ && vim xxx-daily-notes.md"
 
 # ----------------------
 #  Honeycomb specific things
@@ -173,28 +176,8 @@ alias branch_notes="vim xxx-$(eval git rev-parse --abbrev-ref HEAD)-notes.md"
 
 alias "go-docs"=cd "$HOME/workbench/poodle-docs/cmd/poodle/docs"
 
-eval "$(goenv init -)"
-
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-
-export ENV=development
-
-# These are sample paths; your repos do not have to live in your home directory,
-# just make sure you update these paths to point to wherever you cloned the repos above.
-# And don't forget the trailing slash!
-export HOUND_ROOT="$HOME/workbench/hound/"
-export BASENJI_ROOT="$HOME/workbench/basenji/"
-
-export GOPATH=$(go env GOPATH)
-export GOPRIVATE=github.com/honeycomb.io
-export PATH=$PATH:$GOPATH/bin
-
-export LIBHONEY_DATASET=run-run-run
-
-
-export ST_API=""
-export FREE_DATASET="hello"
 
 alias tilt="cd ~/workbench/hound && tilt" 
 alias besttilt="tilt args -- --webpack-dev-server"
@@ -241,7 +224,7 @@ alias pdocs="cd ~/workbench/poodle-docs/cmd/poodle/docs/"
 #
 
 # Kubectl
-klogs () {
+klogs () {/var/folders/md/65s233m96tj5km4zcnzxh7880000gp/T/TemporaryItems/NSIRD_screencaptureui_7oSUXZ/Screen\ Shot\ 2022-11-08\ at\ 4.26.39\ PM.png 
 	kubectl logs $@ -f $(kubectl get pods $@ | tail -n +2 | fzf | cut -d' ' -f1)
 }
 
@@ -262,7 +245,7 @@ alias localBranches="git log --branches --not --remotes --no-walk --decorate"
 #—-—----------------—---------------
 
 # "normal" team
-export FREE_API="77661c513f0a82390f53be3d9f81d8e8"
+export FREE_API="77661c513f0a82390f53be3d9f81d8e"
 export FREE_API_URL=http://localhost:8081
 
 # basenji team
@@ -273,7 +256,10 @@ export BASENJI_URL=http://localhost:8088
 # comment this out if you don't want things to be slow
 # export LIBHONEY_URL=$FREE_API_URL
 # export LIBHONEY_WRITE_KEY=$FREE_API
-# ulimit -n 8192
+
+# export LIBHONEY_URL=$BASENJI_URL
+# export LIBHONEY_WRITE_KEY=$BASENJI_KEY
+ulimit -n 8192
 
 
 # generate a ton of data:
@@ -286,4 +272,7 @@ LIST=`git diff-index --diff-filter=d --name-only HEAD | grep "\.[tj]s[x]\{0,1\}$
 if [ "$LIST" ]; then cd cmd/poodle; npx eslint --quiet $LIST; fi
 }
 
-# alias upgradeGo="cd $HOUND_ROOT; git checkout main; git pull; export GO_VERSION="$(cat .go-version)"; brew update && brew install goenv --head; goenv install $GO_VERSION; goenv shell $GO_VERSION; cd $HOUND_ROOT; git checkout -"
+eval "$(direnv hook zsh)"
+. /usr/local/opt/asdf/libexec/asdf.sh
+
+alias weather="curl 'wttr.in/jersey+city?u'"

@@ -2,6 +2,8 @@ scratchpad.txt
 *scratch*
 scratch
 xxx-*.md
+# this is not ideal. temp hack until can get fuzzy search to ignore static dir in poodle
+static
 
 # Compiled source #
 ###################
@@ -28,7 +30,7 @@ xxx-*.md
 # Logs and databases #
 ######################
 *.log
-*.sql
+# *.sql
 *.sqlite
 
 # OS generated files #

@@ -41,6 +41,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "
+"
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'direnv/direnv.vim'
+
 " Markdown
 "
 Plug 'reedes/vim-pencil'
@@ -53,7 +58,7 @@ autocmd! User goyo.vim echom 'Goyo is now loaded!'
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
-  let g:closetag_filenames = '*.js'
+  let g:closetag_filenames = '*.js,*.jsx,*.ts,*.tsx'
   
 "
 " Tmux friendlyifier
@@ -342,6 +347,7 @@ let g:ctrlp_map = '<leader>f'
 " https://github.com/kien/ctrlp.vim/issues/174
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_switch_buffer = 0
 
 " ----------------------------------------------------------------------------
 " mouse
@@ -367,4 +373,11 @@ augroup js
   autocmd FileType typescriptreact call SetUpEnvironment() 
   autocmd FileType javascript call SetUpEnvironment() 
 augroup END
-"
+
+" ----------------------------------------------------------------------------
+" Go stuff
+" ----------------------------------------------------------------------------
+" open extra info in popover window instead of seperate pane
+let g:go_doc_popup_window = 1
+let g:go_def_mode='godef'
+let g:go_gocode_autobuild = 0
