@@ -8,5 +8,6 @@ root: <%= @settings["workspace"] %>
 windows:
   - EDITOR: nvim .
   - TEST:
-  - CONSOLE: 
-  - LOGS: 
+  - CONSOLE:
+  - NOTES:
+  - TILT:

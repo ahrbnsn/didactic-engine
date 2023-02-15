@@ -76,6 +76,11 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
+
+# ENV secrets
+export DOGFOOD_WRITEKEY=""
+source ~/secrets.sh
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -215,39 +220,12 @@ alias "go-docs"=cd "$HOME/workbench/poodle-docs/cmd/poodle/docs"
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export BASENJI_ROOT="$HOME/workbench/basenji/"
 
 alias tilt="cd ~/workbench/hound && tilt" 
 alias besttilt="tilt args -- --webpack-dev-server"
 
 unalias gsts # ohmyzsh has a git alias that smashes gsts cli tool
-
-# MARKDOWN PREVIEW HELPERS
-
-MARKDOWN_PREVIEW_DIR="~/workbench/markdown-preview"
-
-# `sync_markdown`: copies `*.md` files from the current working directory over 
-#     to markdown-preview and watches for changes, updating the copied files 
-#     anytime they're modified
-#
-#     Symlinks unfortunately won't play nicely w/ webpack's hot reloading, and 
-#     I failed to figure out a good way to watch files in another directory 
-#     direcly, so we copy.
-
-alias sync_markdown="node $MARKDOWN_PREVIEW_DIR/utils/sync -w $PWD"
-
-# `preview_markdown`: starts up the next.js app from anywhere our heart desires
-alias preview_markdown="yarn --cwd "$MARKDOWN_PREVIEW_DIR" dev"
-
-# `sync_and_preview`: start syncing & launch the web server in one fell swoop
-function sync_and_preview() {
-  preview_markdown & sync_markdown
-}
-
-# `add_toc`: update toc for file
-alias add_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc -i $PWD/"
-
-# `print_toc`: print to console the toc for file
-alias print_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc $PWD/"
 
 # gsts/aws fun
 export AWS_PROFILE=sts
@@ -255,31 +233,25 @@ export GOOGLE_SP_ID=456279060050
 export GOOGLE_IDP_ID=C01jgaetc
 export HNYUSER="ashleyrobinson"
 alias prodaccess="gsts --aws-role-arn arn:aws:iam::702835727665:role/product --username=$HNYUSER@honeycomb.io"
- 
- 
+
+
 alias pdocs="cd ~/workbench/poodle-docs/cmd/poodle/docs/"
-#
 
-# Kubectl
-klogs () {/var/folders/md/65s233m96tj5km4zcnzxh7880000gp/T/TemporaryItems/NSIRD_screencaptureui_7oSUXZ/Screen\ Shot\ 2022-11-08\ at\ 4.26.39\ PM.png 
-	kubectl logs $@ -f $(kubectl get pods $@ | tail -n +2 | fzf | cut -d' ' -f1)
+
+# strip off :line-number from the end of vim ,C output and start running yarn watch
+function watch() {
+  file=$1
+  cd ~/workbench/hound/cmd/poodle/ && yarn jest --watch ${file/:*/}
 }
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-# git aliases
-alias currentBranch="git rev-parse --abbrev-ref HEAD | pbcopy"
-alias localBranches="git log --branches --not --remotes --no-walk --decorate"
-
-
-
-
 #—-------------------------------
 #
 # Poodle Local Dev Aliases & Things
 #
 #—-—----------------—---------------
+
+# satellite team
+export DEV_WRITEKEY=$DOGFOOD_WRITEKEY
+export SATELLITE_URL="https://api-dogfood.honeycomb.io"
 
 # "normal" team
 export FREE_API="77661c513f0a82390f53be3d9f81d8e"
@@ -311,5 +283,60 @@ if [ "$LIST" ]; then cd cmd/poodle; npx eslint --quiet $LIST; fi
 
 eval "$(direnv hook zsh)"
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+
+
+# ----------------------
+#  
+#  Markdown Preview Helpers
+#  
+# ----------------------
+
+
+MARKDOWN_PREVIEW_DIR="~/workbench/markdown-preview"
+
+# `sync_markdown`: copies `*.md` files from the current working directory over 
+#     to markdown-preview and watches for changes, updating the copied files 
+#     anytime they're modified
+#
+#     Symlinks unfortunately won't play nicely w/ webpack's hot reloading, and 
+#     I failed to figure out a good way to watch files in another directory 
+#     direcly, so we copy.
+
+alias sync_markdown="node $MARKDOWN_PREVIEW_DIR/utils/sync -w $PWD"
+
+# `preview_markdown`: starts up the next.js app from anywhere our heart desires
+alias preview_markdown="yarn --cwd "$MARKDOWN_PREVIEW_DIR" dev"
+
+# `sync_and_preview`: start syncing & launch the web server in one fell swoop
+function sync_and_preview() {
+  preview_markdown & sync_markdown
+}
+
+# `add_toc`: update toc for file
+alias add_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc -i $PWD/"
+
+# `print_toc`: print to console the toc for file
+alias print_toc="yarn --cwd $MARKDOWN_PREVIEW_DIR markdown-toc $PWD/"
+
+ 
+ 
+#
+
+# Kubectl
+klogs () {
+	kubectl logs $@ -f $(kubectl get pods $@ | tail -n +2 | fzf | cut -d' ' -f1)
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# git aliases
+alias currentBranch="git rev-parse --abbrev-ref HEAD | pbcopy"
+alias localBranches="git log --branches --not --remotes --no-walk --decorate"
+
+
+
+
 
 alias weather="curl 'wttr.in/jersey+city?u'"
