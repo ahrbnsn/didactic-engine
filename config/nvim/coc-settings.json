@@ -1,5 +1,5 @@
 {
   "eslint.autoFixOnSave": true,
   "coc.preferences.formatOnSave": true,
-  "tsservernformatOnType": true
+  "tsservernformatOnType": false
 }

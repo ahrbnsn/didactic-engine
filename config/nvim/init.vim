@@ -93,8 +93,8 @@ set nowrap
 set backspace=indent,eol,start
 set hidden " keep undo history when switching buffers
 
-set list
-set listchars=trail:.
+" set list
+" set listchars=trail:.
 
 set showmatch       " show matching brackets 
 set splitright
