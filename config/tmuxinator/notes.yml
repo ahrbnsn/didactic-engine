@@ -1,5 +1,5 @@
 name: notes
-root: ~/
+root: ~/notes
 
 # Optional tmux socket
 # socket_name: foo
@@ -43,5 +43,6 @@ root: ~/
 # attach: false
 
 windows:
-  - work: vim -c "VimwikiMakeDiaryNote 2"
-  - personal: vim -c "VimwikiMakeDiaryNote 1"
+  - work: vim $(date -v -Mon "+%Y-%m-%d")-notes.md
+  - todo: vim running-todo.md
+  - personal: vim personal/$(date -v -Mon "+%Y-%m-%d")-notes.md

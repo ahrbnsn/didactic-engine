@@ -134,10 +134,48 @@ alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --res
 alias cat="bat"
 
 # ----------------------
-#  Tmuxinator helpers
+#  Note taking assists 
 # ----------------------
 
 alias notes="t notes"
+
+# TODO: add optional project/tag
+# use template depending on project/tag?
+# could also do some checking to see if a file exists w/in same week, and use
+# that instead of whipping up a new one
+function note() {
+  if [ -z "$1" ]; then 
+    vim ~/notes/$(date -v -Mon "+%Y-%m-%d").md
+  else 
+    vim ~/notes/$(date "+%Y-%m-%d")-$1.md
+  fi
+}
+
+#TODO add PR when it is opened?
+function branch-notes() {
+  project=$(basename $PWD)
+  branch_file=$(eval git rev-parse --abbrev-ref HEAD).md
+
+  mkdir -p ~/notes/repos/$project
+  cd ~/notes/repos/$project
+
+  existing_note=$(ls | grep $branch_file)
+
+  if [ ! -z "$existing_note" ]; then
+    echo -e "\n\n$(date "+%Y-%m-%d")" >> $existing_note
+
+    vim $existing_note
+  else
+    vim $(date "+%Y-%m-%d")-${branch_file}
+  fi
+
+  cd $OLDPWD
+}
+
+
+# ----------------------
+#  Tmuxinator helpers
+# ----------------------
 
 function t() {
   if [ -z "$1" ]; then
@@ -162,8 +200,6 @@ function launch_tmux_project() {
 }
 
 
-alias branch_notes="vim xxx-$(eval git rev-parse --abbrev-ref HEAD)-notes.md"
-alias daily_notes="cd ~/workbench/hound/cmd/poodle/ && vim xxx-daily-notes.md"
 
 # ----------------------
 #  Honeycomb specific things

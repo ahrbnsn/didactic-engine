@@ -280,23 +280,23 @@ autocmd FileType gitcommit setlocal spell
 " ----------------------------------------------------------------------------
 "  vim-wiki 
 " ----------------------------------------------------------------------------
-function MakeAWiki(path, name, frequency)
-  let wiki = {}
-  let wiki.path = a:path 
-  let wiki.name = a:name
-  let wiki.syntax = 'markdown'
-  let wiki.ext = 'md'
-  let wiki.diary_index = 'notes'
-  let wiki.diary_header = 'Notes'
-  let wiki.diary_frequency = a:frequency
-  return wiki
-endfunction
+" function MakeAWiki(path, name, frequency)
+"   let wiki = {}
+"   let wiki.path = a:path 
+"   let wiki.name = a:name
+"   let wiki.syntax = 'markdown'
+"   let wiki.ext = 'md'
+"   let wiki.diary_index = 'notes'
+"   let wiki.diary_header = 'Notes'
+"   let wiki.diary_frequency = a:frequency
+"   return wiki
+" endfunction
 
-autocmd BufNewFile,BufRead *.wiki set filetype=markdown
-let wiki_1 = MakeAWiki('~/notes/personal', 'Grabbag', 'weekly')
-let wiki_2 = MakeAWiki('~/notes/work/', 'Work', 'weekly')
+" autocmd BufNewFile,BufRead *.wiki set filetype=markdown
+" let wiki_1 = MakeAWiki('~/notes/personal', 'Grabbag', 'weekly')
+" let wiki_2 = MakeAWiki('~/notes/work/', 'Work', 'weekly')
 
-let g:vimwiki_list = [wiki_1, wiki_2]
+" let g:vimwiki_list = [wiki_1, wiki_2]
 
 
 " ----------------------------------------------------------------------------
