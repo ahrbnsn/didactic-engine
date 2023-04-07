@@ -128,10 +128,19 @@ alias xit="exit"
 
 alias at="tmux at"
 
+# copy last command run 
+alias copy_cmd="fc -ln -1 | pbcopy"
+
+
+# --- git helpers ----
 alias prune="git branch | grep -v 'main' | xargs git branch -D"
 alias amendit="git commit --amend --no-edit"
 alias gpof="git push origin head --force-with-lease"
 alias rewind="git reset HEAD~1"
+
+alias list_branches="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short) %(committerdate:relative)'"
+
+#
 
 alias saveaudio="youtube-dl -o '~/Desktop/music/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata -x --audio-format m4a"
 alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --restrict-filenames --add-metadata --write-sub"
@@ -150,9 +159,9 @@ alias notes="t notes"
 # that instead of whipping up a new one
 function note() {
   if [ -z "$1" ]; then 
-    vim ~/notes/$(date -v -Mon "+%Y-%m-%d").md
+    vim ~/notes/$(date -v -Mon "+%Y-%m-%d").md -c w
   else 
-    vim ~/notes/$(date "+%Y-%m-%d")-$1.md
+    vim ~/notes/$(date "+%Y-%m-%d")-$1.md -c w
   fi
 }
 
