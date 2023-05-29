@@ -1,0 +1,9 @@
+name: scaffold
+root: ~/workbench/hound/cmd/poodle
+
+windows:
+  - EDITOR: nvim .
+  - TEST:
+  - CONSOLE: node
+  - NOTES: cd ~/notes/  && vim $(date -v -Mon "+%Y-%m-%d")-notes.md
+  - TILT: cd ~/workbench/hound/
