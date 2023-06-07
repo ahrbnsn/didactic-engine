@@ -1,4 +1,4 @@
-name: scaffold
+name: poodle
 root: ~/workbench/hound/cmd/poodle
 
 windows:

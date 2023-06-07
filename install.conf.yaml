@@ -1,9 +1,9 @@
-- defaults: 
+- defaults:
     link:
       create: true
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.config/nvim: config/nvim
@@ -27,7 +27,5 @@
   - ~/Desktop/notes
   - ~/Desktop/books-work
   - ~/Desktop/books-personal
-
-
-
-  
+  - ~/notes/todo
+  - ~/notes/projects

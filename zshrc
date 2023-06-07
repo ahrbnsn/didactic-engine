@@ -147,6 +147,10 @@ alias savevideo="youtube-dl -o '~/Desktop/videos/%(title)s-%(id)s.%(ext)s' --res
 
 alias cat="bat"
 
+# so sudo vim actually runs sudo nvim
+# https://unix.stackexchange.com/questions/710187/how-do-i-make-an-alias-for-a-command-with-sudo
+alias sudo="sudo "
+
 # ----------------------
 #  Note taking assists 
 # ----------------------
@@ -163,6 +167,19 @@ function note() {
   else 
     vim ~/notes/$(date "+%Y-%m-%d")-$1.md -c w
   fi
+
+}
+
+function todo {
+    vim ~/notes/todo/$(date -v -Mon "+%Y-%m-%d").md -c w
+}
+
+function git-todo {
+  project=$(basename $PWD)
+  branch=$(eval git rev-parse --abbrev-ref HEAD)
+
+  vim ~/notes/todo/$(date -v -Mon "+%Y-%m-%d")-$project-$branch.md -c w
+
 }
 
 #TODO add PR when it is opened?
