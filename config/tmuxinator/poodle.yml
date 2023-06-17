@@ -4,11 +4,10 @@ root: ~/workbench/hound/cmd/poodle
 windows:
   - EDITOR: nvim .
   - TEST:
-  - CONSOLE: node
+  - CONSOLE:
+      layout: even-horizontal
   - NOTES: cd ~/notes/  && vim $(date -v -Mon "+%Y-%m-%d")-notes.md
   - TILT/HOUND:
-    layout: even-horizontal
-    panes:
-      - tilt cd ~/workbench/hound/
-      - cd ~/workbench/hound/
+      layout: even-horizontal
+      root: ~/workbench/hound/
   - TODO: note todo
