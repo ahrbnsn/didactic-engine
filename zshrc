@@ -170,6 +170,17 @@ function note() {
 
 }
 
+
+alias w_date="$(print date -v -Mon "+%Y-%m-%d")"
+function qn() {
+  if [ -z "$1" ]; then 
+    vim ./$(date -v -Mon "+%Y-%m-%d").md -c w
+  else 
+    vim ./$(date "+%Y-%m-%d")-$1.md -c w
+  fi
+
+}
+
 function todo {
     vim ~/notes/todo/$(date -v -Mon "+%Y-%m-%d").md -c w
 }
@@ -280,12 +291,8 @@ export DEV_WRITEKEY=$DOGFOOD_WRITEKEY
 export SATELLITE_URL="https://api-dogfood.honeycomb.io"
 
 # "normal" team
-export FREE_API="77661c513f0a82390f53be3d9f81d8e"
+export FREE_API="aECV7VDfGHVCKieQZeKKxC"
 export FREE_API_URL=http://localhost:8081
-
-# basenji team
-export BASENJI_KEY="bfda4f50dacfcc7db0037641b4377c8f"
-export BASENJI_URL=http://localhost:8088
 
 # Some of the code uses a lot of connections
 # comment this out if you don't want things to be slow

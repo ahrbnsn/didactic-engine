@@ -18,14 +18,15 @@
     ~/.vimrc: vimrc
     ~/.zsh: zsh
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
 
 - create:
-  - ~/Desktop/images
-  - ~/Desktop/papers
-  - ~/Desktop/music
-  - ~/Desktop/video
-  - ~/Desktop/notes
-  - ~/Desktop/books-work
-  - ~/Desktop/books-personal
-  - ~/notes/todo
-  - ~/notes/projects
+    - ~/Desktop/images
+    - ~/Desktop/papers
+    - ~/Desktop/music
+    - ~/Desktop/video
+    - ~/Desktop/notes
+    - ~/Desktop/books-work
+    - ~/Desktop/books-personal
+    - ~/notes/todo
+    - ~/notes/projects

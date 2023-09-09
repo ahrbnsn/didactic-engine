@@ -1,3 +1,5 @@
-# aliases available in vim. could also pull into separate file and source here & in zshrc
+# aliases available in vim
 
 alias cat="bat"
+
+alias w_date="$(print -n date -v -Mon "+%Y-%m-%d")"

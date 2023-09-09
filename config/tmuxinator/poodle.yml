@@ -6,8 +6,14 @@ windows:
   - TEST:
   - CONSOLE:
       layout: even-horizontal
+      panes:
+        - node:
+        - etc:
   - NOTES: cd ~/notes/  && vim $(date -v -Mon "+%Y-%m-%d")-notes.md
   - TILT/HOUND:
       layout: even-horizontal
       root: ~/workbench/hound/
-  - TODO: note todo
+      panes:
+        - tilt:
+        - hound:
+  - TODO: todo
