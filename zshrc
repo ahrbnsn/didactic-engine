@@ -139,6 +139,7 @@ alias gpof="git push origin head --force-with-lease"
 alias rewind="git reset HEAD~1"
 
 alias list_branches="git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short) %(committerdate:relative)'"
+alias list_branches_all="git for-each-ref --count=200 --sort=-committerdate refs/heads/ --format='%(refname:short) %(committerdate:relative)'"
 
 #
 

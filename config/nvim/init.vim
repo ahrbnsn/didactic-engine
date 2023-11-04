@@ -65,7 +65,7 @@ Plug 'alvan/vim-closetag'
   let g:closetag_filenames = '*.js,*.jsx,*.ts,*.tsx'
   
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-eslint']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-eslint', 'coc-cssmodules']
 "
 "
 " Tmux friendlyifier

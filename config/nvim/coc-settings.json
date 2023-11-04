@@ -1,5 +1,6 @@
 {
   "eslint.autoFixOnSave": true,
   "coc.preferences.formatOnSave": true,
-  "tsservernformatOnType": false
+  "tsservernformatOnType": false,
+  "cssmodules.camelCase": true
 }
