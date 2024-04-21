@@ -18,7 +18,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 " Plug 'prettier/vim-prettier'
 " Plug 'scrooloose/nerdcommenter'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 " Plug 'sjl/gundo.vim'
 
@@ -181,8 +181,8 @@ map <leader>w   ^Ww
 nmap <leader>=  gg=G``
 
 " Fast scrollin
-nnoremap <C-e>  3<C-e>
-nnoremap <C-y>  3<C-y>
+" nnoremap <C-e>  3<C-e>
+" nnoremap <C-y>  3<C-y>
 
 " File tree browser
 map \           :NERDTreeToggle<CR>
@@ -347,6 +347,13 @@ augroup pencil
   autocmd FileType markdown call pencil#init()
 augroup END
 
+
+"---
+" Prevent hiding markdown syntax
+" ---
+let g:vim_json_syntax_conceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " ----------------------------------------------------------------------------
 " ctrp settings

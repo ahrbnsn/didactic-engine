@@ -279,7 +279,7 @@ alias pdocs="cd ~/workbench/poodle-docs/cmd/poodle/docs/"
 # strip off :line-number from the end of vim ,C output and start running yarn watch
 function watch() {
   file=$1
-  cd ~/workbench/hound/cmd/poodle/ && yarn jest --watch ${file/:*/}
+  cd ~/workbench/hound/cmd/poodle/ && yarn jest --detectOpenHandles --logHeapUsage --runInBand --no-compilation-cache --watch ${file/:*/}
 }
 #—-------------------------------
 #
